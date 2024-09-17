@@ -1,69 +1,75 @@
 package CodeTestCoverJava;
 
 public class Soundex {
- private static final Map<Character, Character> SOUNDEX_MAP = new HashMap<>();
 
-	    static {
-	        SOUNDEX_MAP.put('B', '1'); SOUNDEX_MAP.put('F', '1'); SOUNDEX_MAP.put('P', '1'); SOUNDEX_MAP.put('V', '1');
-	        SOUNDEX_MAP.put('C', '2'); SOUNDEX_MAP.put('G', '2'); SOUNDEX_MAP.put('J', '2'); SOUNDEX_MAP.put('K', '2');
-	        SOUNDEX_MAP.put('Q', '2'); SOUNDEX_MAP.put('S', '2'); SOUNDEX_MAP.put('X', '2'); SOUNDEX_MAP.put('Z', '2');
-	        SOUNDEX_MAP.put('D', '3'); SOUNDEX_MAP.put('T', '3');
-	        SOUNDEX_MAP.put('L', '4');
-	        SOUNDEX_MAP.put('M', '5'); SOUNDEX_MAP.put('N', '5');
-	        SOUNDEX_MAP.put('R', '6');
-	    }
+public static String generateSoundex(String name) {
+		if (isEmptyString(name)) {
+			return "";
+		}
+		StringBuilder soundex = buildSoundex(name);
+		while (soundex.length() < 4) {
+			soundex.append('0');
+		}
+		return soundex.toString();
+	}
 
-	    public static String generateSoundex(String name) {
-	        if (isInvalidName(name)) {
-	            return "";
-	        }
+	public static StringBuilder buildSoundex(String name) {
+		StringBuilder soundex = new StringBuilder();
+		soundex.append(Character.toUpperCase(name.charAt(0)));
+		char prevCode = getSoundexCode(name.charAt(0));
+		for (int index = 1; checkLength(index, name.length(), soundex.length()); index++) {
+			char code = getSoundexCode(name.charAt(index));
+			if (doAppend(code, prevCode)) {
+				soundex.append(code);
+				prevCode = code;
+			}
+		}
+		return soundex;
+	}
 
-	        StringBuilder soundex = new StringBuilder();
-	        char firstChar = appendFirstChar(name, soundex);
-	        char prevCode = getSoundexCode(firstChar);
+	public static boolean checkLength(int index, int nameLength, int soundexLength) {
+		return index < nameLength && soundexLength < 4;
+	}
 
-	        processRemainingChars(name, soundex, prevCode);
+	public static boolean doAppend(char code, char prevCode) {
+		return code != '0' && code != prevCode;
+	}
 
-	        return padWithZeros(soundex).toString();
-	    }
+	public static char getSoundexCode(char c) {
+		Map<Character, Character> characterMap = buildSoundexMap();
+		if(characterMap.containsKey(Character.toUpperCase(c))) {
+			return characterMap.get(Character.toUpperCase(c));
+		}
+		return '0';
+	}
 
-	    private static boolean isInvalidName(String name) {
-	        return name == null || name.isEmpty();
-	    }
+	public static Map<Character, Character> buildSoundexMap() {
+		Map<Character, Character> characterMap = new HashMap<>();
+		characterMap.putAll(populateSoundexMap(Arrays.asList('B', 'F', 'P', 'V'), '1'));
+		characterMap.putAll(populateSoundexMap(Arrays.asList('C', 'G', 'J', 'K', 'Q', 'S', 'X', 'Z'), '2'));
+		characterMap.putAll(populateSoundexMap(Arrays.asList('D', 'T'), '3'));
+		characterMap.putAll(populateSoundexMap(Arrays.asList('L'), '4'));
+		characterMap.putAll(populateSoundexMap(Arrays.asList('M', 'N'), '5'));
+		characterMap.putAll(populateSoundexMap(Arrays.asList('R'), '6'));
+		return characterMap;
+	}
 
-	    private static char appendFirstChar(String name, StringBuilder soundex) {
-	        char firstChar = Character.toUpperCase(name.charAt(0));
-	        soundex.append(firstChar);
-	        return firstChar;
-	    }
+	public static Map<Character, Character> populateSoundexMap(List<Character> nameCharList, char code) {
+		Map<Character, Character> characterMap = new HashMap<>();
+		if(isEmptyList(nameCharList)) {
+			for(Character nameChar: nameCharList) {
+				characterMap.put(nameChar, code);
+			}
+		}
+		return characterMap;
+	}
 
-	    private static void processRemainingChars(String name, StringBuilder soundex, char prevCode) {
-	        for (int i = 1; i < name.length() && soundex.length() < 4; i++) {
-	            char currentChar = Character.toUpperCase(name.charAt(i));
-	            char code = getSoundexCode(currentChar);
+	public static boolean isEmptyString(String input) {
+		return input == null || input.isEmpty();
+	}
 
-	            if (isValidCode(code, prevCode)) {
-	                soundex.append(code);
-	                prevCode = code;
-	            }
-	        }
-	    }
-
-	    private static boolean isValidCode(char code, char prevCode) {
-	        return code != '0' && code != prevCode;
-	    }
-
-	    private static StringBuilder padWithZeros(StringBuilder soundex) {
-	        while (soundex.length() < 4) {
-	            soundex.append('0');
-	        }
-	        return soundex;
-	    }
-
-	    private static char getSoundexCode(char c) {
-	        return SOUNDEX_MAP.getOrDefault(c, '0');
-	    }
-	
-    
+	public static boolean isEmptyList(List<Character> inputList) {
+		return inputList != null && !inputList.isEmpty();
+	}
 }
 
