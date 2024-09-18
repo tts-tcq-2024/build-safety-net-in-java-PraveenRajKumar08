@@ -3,7 +3,9 @@ package CodeTestCoverJava;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Test;
 
 
@@ -73,6 +75,31 @@ public class SoundexTest { // Test cases for generateSoundex method
 	    @Test
 	    public void testGetSoundexCodeWithUnmappedCharacter() {
 	        assertEquals('0', Soundex.getSoundexCode('A'));
+	    }
+
+	 @Test
+	    public void testBuildSoundexMap() {
+	        Map<Character, Character> expectedMap = new HashMap<>();
+	        expectedMap.putAll(Soundex.populateSoundexMap(Arrays.asList('B', 'F', 'P', 'V'), '1'));
+	        expectedMap.putAll(Soundex.populateSoundexMap(Arrays.asList('C', 'G', 'J', 'K', 'Q', 'S', 'X', 'Z'), '2'));
+	        expectedMap.putAll(Soundex.populateSoundexMap(Arrays.asList('D', 'T'), '3'));
+	        expectedMap.putAll(Soundex.populateSoundexMap(Arrays.asList('L'), '4'));
+	        expectedMap.putAll(Soundex.populateSoundexMap(Arrays.asList('M', 'N'), '5'));
+	        expectedMap.putAll(Soundex.populateSoundexMap(Arrays.asList('R'), '6'));
+	        
+	        Map<Character, Character> result = Soundex.buildSoundexMap();
+	        assertEquals(expectedMap, result);
+	    }
+
+	    @Test
+	    public void testPopulateSoundexMapWithValidList() {
+	        Map<Character, Character> result = Soundex.populateSoundexMap(Arrays.asList('B', 'F', 'P', 'V'), '1');
+	        Map<Character, Character> expectedMap = new HashMap<>();
+	        expectedMap.put('B', '1');
+	        expectedMap.put('F', '1');
+	        expectedMap.put('P', '1');
+	        expectedMap.put('V', '1');
+	        assertEquals(expectedMap, result);
 	    }
 
 	   
