@@ -5,10 +5,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
+
 
 
 public class SoundexTest { // Test cases for generateSoundex method
@@ -132,21 +134,22 @@ public class SoundexTest { // Test cases for generateSoundex method
 	    
 	    // Test cases for buildSoundexMap method
 	  
-	    @Test
+	      @Test
 	    public void testPopulateSoundexMap_Valid() {
-	        List<Character> vowels = Arrays.asList('A', 'E', 'I', 'O', 'U');  // Correct typing
+	        List<Character> vowels = Arrays.asList('A', 'E', 'I', 'O', 'U'); 
 	        Map<Character, Character> populatedMap = Soundex.populateSoundexMap(vowels, '0');
-	        assertEquals(Character.valueOf('0'), populatedMap.get('A')); // Explicitly use Character.valueOf
+	        assertEquals(Character.valueOf('0'), populatedMap.get('A'));
 	        assertEquals(Character.valueOf('0'), populatedMap.get('E'));
 	        assertEquals(Character.valueOf('0'), populatedMap.get('I'));
 	    }
 
 	    @Test
 	    public void testPopulateSoundexMap_EmptyList() {
-	        List<Character> emptyList = Arrays.asList();  // Explicit empty list of type Character
+	        List<Character> emptyList = Collections.emptyList();  
 	        Map<Character, Character> populatedMap = Soundex.populateSoundexMap(emptyList, '0');
-	        assertTrue(populatedMap.isEmpty()); // Should return an empty map if list is empty
+	        assertTrue(populatedMap.isEmpty()); 
 	    }
+
 
 	    // Test cases for isEmptyString method
 	    @Test
