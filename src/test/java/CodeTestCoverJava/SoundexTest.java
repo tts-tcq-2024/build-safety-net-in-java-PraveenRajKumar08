@@ -8,8 +8,6 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 
 public class SoundexTest { // Test cases for generateSoundex method
 	    @Test
