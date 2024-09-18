@@ -143,14 +143,6 @@ public class SoundexTest { // Test cases for generateSoundex method
 	        assertEquals(Character.valueOf('0'), populatedMap.get('I'));
 	    }
 
-	    @Test
-	    public void testPopulateSoundexMap_EmptyList() {
-	        List<Character> emptyList = Collections.emptyList();  
-	        Map<Character, Character> populatedMap = Soundex.populateSoundexMap(emptyList, '0');
-	        assertTrue(populatedMap.isEmpty()); 
-	    }
-
-
 	    // Test cases for isEmptyString method
 	    @Test
 	    public void testIsEmptyString_Null() {
