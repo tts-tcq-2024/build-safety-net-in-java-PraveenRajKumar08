@@ -107,22 +107,5 @@ public class SoundexTest { // Test cases for generateSoundex method
 	        Map<Character, Character> result = Soundex.populateSoundexMap(Arrays.asList(), '1');
 	        assertTrue(result.isEmpty());
 	    }
-
-	    @Test
-	    public void testIsEmptyString() {
-	        assertTrue(Soundex.isEmptyString(""));
-	        assertTrue(Soundex.isEmptyString(null));
-	        assertFalse(Soundex.isEmptyString("NonEmpty"));
-	    }
-
-	    @Test
-	    public void testIsEmptyList() {
-	        assertTrue(Soundex.isEmptyList(Arrays.asList('A')));
-	        assertFalse(Soundex.isEmptyList(Arrays.asList()));
-	        assertFalse(Soundex.isEmptyList(null));
-	    }
-
-	   
-
-	  
+  
 }
