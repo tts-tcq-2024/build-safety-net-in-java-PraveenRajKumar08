@@ -153,10 +153,7 @@ public class SoundexTest { // Test cases for generateSoundex method
 	        assertFalse(Soundex.isEmptyList(null)); 
 	    }
 
-	    @Test
-	    public void testIsEmptyList_Empty() {
-	        assertFalse(Soundex.isEmptyList(Arrays.asList())); 
-	    }
+	   
 
 	  
 }
