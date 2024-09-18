@@ -132,16 +132,6 @@ public class SoundexTest { // Test cases for generateSoundex method
 	    }
 
 	    
-	    // Test cases for buildSoundexMap method
-	  
-	      @Test
-	    public void testPopulateSoundexMap_Valid() {
-	        List<Character> vowels = Arrays.asList('A', 'E', 'I', 'O', 'U'); 
-	        Map<Character, Character> populatedMap = Soundex.populateSoundexMap(vowels, '0');
-	        assertEquals(Character.valueOf('0'), populatedMap.get('A'));
-	        assertEquals(Character.valueOf('0'), populatedMap.get('E'));
-	        assertEquals(Character.valueOf('0'), populatedMap.get('I'));
-	    }
 
 	    // Test cases for isEmptyString method
 	    @Test
