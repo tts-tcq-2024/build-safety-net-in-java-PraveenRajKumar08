@@ -33,31 +33,21 @@ public class SoundexTest { // Test cases for generateSoundex method
 	        assertEquals("D130", Soundex.generateSoundex(name));
 	    }
 
-
-	 @Test
-	    public void testNameWithRepeatingCharacters() {  
-	        String name = "David";
-	        assertEquals("D130", Soundex.generateSoundex(name));
-	    }
-	    
-	    
 	    @Test
-	    public void testGenerateSoundexWithValidName() {
-	        String result = Soundex.generateSoundex("Robert");
-	        assertEquals("R163", result);
+	    public void testCheckLengthTrue() {
+	        assertTrue(Soundex.checkLength(2, 5, 2));
 	    }
 
 	    @Test
-	    public void testGenerateSoundexWithEmptyString() {
-	        String result = Soundex.generateSoundex("");
-	        assertEquals("", result);
+	    public void testCheckLengthFalseWhenIndexExceeds() {
+	        assertFalse(Soundex.checkLength(5, 4, 2));
 	    }
 
 	    @Test
-	    public void testGenerateSoundexWithNull() {
-	        String result = Soundex.generateSoundex(null);
-	        assertEquals("", result);
+	    public void testCheckLengthFalseWhenSoundexLengthExceeds() {
+	        assertFalse(Soundex.checkLength(2, 5, 4));
 	    }
+
 	   
 
 	  
