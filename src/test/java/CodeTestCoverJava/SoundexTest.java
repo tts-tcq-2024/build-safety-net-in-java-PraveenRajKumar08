@@ -50,6 +50,31 @@ public class SoundexTest { // Test cases for generateSoundex method
 	        assertFalse(Soundex.checkLength(2, 5, 4));
 	    }
 
+	 @Test
+	    public void testDoAppendTrue() {
+	        assertTrue(Soundex.doAppend('2', '1'));
+	    }
+
+	    @Test
+	    public void testDoAppendFalseWhenCodeIsZero() {
+	        assertFalse(Soundex.doAppend('0', '1'));
+	    }
+
+	    @Test
+	    public void testDoAppendFalseWhenCodesAreSame() {
+	        assertFalse(Soundex.doAppend('1', '1'));
+	    }
+
+	    @Test
+	    public void testGetSoundexCodeWithMappedCharacter() {
+	        assertEquals('1', Soundex.getSoundexCode('B'));
+	    }
+
+	    @Test
+	    public void testGetSoundexCodeWithUnmappedCharacter() {
+	        assertEquals('0', Soundex.getSoundexCode('A'));
+	    }
+
 	   
 
 	  
