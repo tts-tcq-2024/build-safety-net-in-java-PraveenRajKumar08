@@ -1,0 +1,16 @@
+Sl No.,Test Case,Description,Input,Expected Output
+TC_001,testEmptyString,Verifies that the Soundex generation handles empty strings correctly.,"Empty string """"","An empty string """" as the Soundex code"
+TC_002,testNullString,Verifies that the Soundex generation handles null strings correctly.,Null string,"An empty string """" as the Soundex code"
+TC_003,testSingleLetterName,Verifies that the Soundex generation correctly handles single-letter names.,"String with one character ""A""","""A000"" as the Soundex code"
+TC_004,testNameWithRepeatingCharacters,Tests the Soundex generation for a name with repeating characters.,"Name string ""David""","""D130"" as the Soundex code"
+TC_005,testCheckLengthTrue,Verifies that the checkLength function returns true for valid indices and Soundex length.,"Index 2, Soundex length 5, and required length 2",TRUE
+TC_006,testCheckLengthFalseWhenIndexExceeds,Verifies that the checkLength function returns false when the index exceeds the length.,"Index 5, Soundex length 4, required length 2",FALSE
+TC_007,testCheckLengthFalseWhenSoundexLengthExceeds,Verifies that the checkLength function returns false when the Soundex length exceeds the required length.,"Index 2, Soundex length 5, required length 4",FALSE
+TC_008,testDoAppendTrue,Verifies that doAppend returns true for distinct non-zero Soundex codes.,Characters '2' and '1',TRUE
+TC_009,testDoAppendFalseWhenCodeIsZero,Verifies that doAppend returns false when the first code is '0'.,Characters '0' and '1',FALSE
+TC_010,testDoAppendFalseWhenCodesAreSame,Verifies that doAppend returns false when the two codes are the same.,Characters '1' and '1',FALSE
+TC_011,testGetSoundexCodeWithMappedCharacter,Verifies that getSoundexCode returns the correct mapped code for a character.,Character 'B','1' (as B is mapped to '1' in the Soundex algorithm)
+TC_012,testGetSoundexCodeWithUnmappedCharacter,Verifies that getSoundexCode returns '0' for unmapped characters.,Character 'A','0' (as A is not mapped in the Soundex algorithm)
+TC_013,testBuildSoundexMap,Verifies that the Soundex map is built correctly using the buildSoundexMap method.,None (method call),A map with correctly mapped Soundex values for all characters
+TC_014,testPopulateSoundexMapWithValidList,Verifies that the populateSoundexMap method correctly maps characters to Soundex codes.,"List of characters ['B', 'F', 'P', 'V'] and code '1'","A map with 'B', 'F', 'P', 'V' mapped to '1'"
+TC_015,testIsEmptyString,Verifies that the isEmptyString method correctly identifies empty and non-empty strings.,"Empty string """", null, and non-empty string ""NonEmpty""","true for '', true for null, and false for 'NonEmpty'"
